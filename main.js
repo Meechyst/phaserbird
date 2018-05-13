@@ -39,6 +39,10 @@ let mainState = {
     // Generates pipes and loops them.
     this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
 
+    // Initiates the score and displays it
+    this.score = 0;
+    this.labelScore = game.add.text(20, 20, "0",
+      { font: "30px Arial", fill: "#ffffff" });
 
   },
   // Contains game logic. Refreshes 60 times per second.
@@ -47,6 +51,10 @@ let mainState = {
     // >Call the 'restartGame' function
     if (this.bird.y < 0 || this.bird.y > 490)
       this.restartGame();
+
+    // Restarts the game if the bird overlaps the pipe.
+    game.physics.arcade.overlap(
+      this.bird, this.pipes, this.restartGame, null, this);
   },
 
   /*
@@ -79,6 +87,10 @@ let mainState = {
     for (let i = 0; i < 8; i++)
       if (i !== hole && i !== hole + 1)
         this.addOnePipe(400, i * 60 + 10);
+
+    // Adds a score every time a pipe is passed
+    this.score += 1;
+    this.labelScore.text = this.score;
   },
   // Makes the bird jump
   jump() {
