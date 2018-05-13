@@ -1,5 +1,3 @@
-
-
 let mainState = {
   // Loads assets
   preload() {
@@ -98,7 +96,6 @@ let mainState = {
     this.score += 1;
     this.labelScore.text = this.score;
   },
-  // Makes the bird jump
   jump() {
 
     if (this.bird.alive === false)
@@ -116,8 +113,6 @@ let mainState = {
     // And start the animation
     animation.start();
   },
-
-  // Restarts the game
   restartGame() {
     // Starts the main state, which restarts the game
     game.state.start('main');
